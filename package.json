@@ -1,0 +1,12 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API desenvolvida no programa Explorer da Rocketseat.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js"
+  },
+  
+  "author": "Igor Guerra",
+  "license": "ISC"
+}
