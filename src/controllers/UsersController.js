@@ -47,7 +47,7 @@ class UsersController {
         user.email = email ?? user.email;
 
         if( password && !old_password){
-            throw new AppError("A senha atual é necessária para a definção de uma nova senha.");
+            throw new AppError("A senha atual é necessária para a definição de uma nova senha.");
         }
        
         if(password && old_password) {
