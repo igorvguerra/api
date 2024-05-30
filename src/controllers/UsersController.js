@@ -13,7 +13,7 @@ class UsersController {
         const checkUserExist = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
         if(checkUserExist) {
-            throw new AppError("Este e-mail já está em uso.");
+            throw new AppError("This e-mail is already in use.");
         }
 
         const hashedPassword = await hash(password, 8);
@@ -32,13 +32,13 @@ class UsersController {
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [user_id]);
 
         if(!user) {
-            throw new AppError("Usuário não encontrado.");
+            throw new AppError("User not found.");
         }
 
         const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
         if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id){
-            throw new AppError("Este e-mail já está em uso.");
+            throw new AppError("This e-mail is already in use.");
         }
 
         
@@ -47,14 +47,14 @@ class UsersController {
         user.email = email ?? user.email;
 
         if( password && !old_password){
-            throw new AppError("A senha atual é necessária para a definição de uma nova senha.");
+            throw new AppError("Current password is necessary to change to a new password.");
         }
        
         if(password && old_password) {
             const checkOldPassword = await compare(old_password, user.password);
  
             if(!checkOldPassword){
-                throw new AppError("A senha atual está incorreta.");
+                throw new AppError("Current password is incorrect.");
             }
 
             user.password = await hash(password, 8);
